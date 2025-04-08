@@ -2,6 +2,10 @@
 
 TrailGrade is a Python-based system that analyzes hiking trail data to generate multidimensional difficulty ratings using various components like elevation, distance, etc. Users can view nearby trail data and difficulty ratings as well as create their own trails.
 
+This is a public repository version of a group project for CS422 - Software Methodology class at the University of Oregon
+
+Authors: Jake Ferraro, Caden Weigel, Parker Stevenson, Logan Sommerville, and Giovanni Mendoza Celestino
+
 ## Installation Instructions
 
 ### Requirements
