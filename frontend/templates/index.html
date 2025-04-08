@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrailGrade - Smart Hiking Trail Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/splash.css') }}">
+</head>
+
+<body>
+    <section class="hero">
+        <h1>TrailGrade</h1>
+        <p>Discover hiking trails with detailed, multi-dimensional difficulty ratings for a safer, more enjoyable experience</p>
+        <a href="/trails" class="cta-button">Explore Trails</a>
+        <a href="/trailcreator" class="cta-button">Create Trails</a>
+    </section>
+
+    <section class="featured-trails">
+        <h2>Featured Trails</h2>
+        <div class="trail-cards">
+            <div class="trail-card trail-card-1">
+                <div class="trail-img"></div>
+                <div class="trail-details">
+                    <h3>Spencer Butte from Frank Kinney Park</h3>
+                    <div class="trail-metrics">
+                        <span><strong>Length:</strong> 10.0 km</span>
+                        <span><strong>Elevation:</strong> 610 m</span>
+                    </div>
+                    <p><strong>Difficulty:</strong> <span class="difficulty-indicator" style="background-color: rgb(255, 145, 0);">7</span> Challenging</p>
+                    <a href="/trail_path/Spencer%20Butte%20from%20Frank%20Kinney%20Park" class="cta-button">View Trail</a>
+                </div>
+            </div>
+            
+            <div class="trail-card trail-card-2">
+                <div class="trail-img"></div>
+                <div class="trail-details">
+                    <h3>Pre's Trail</h3>
+                    <div class="trail-metrics">
+                        <span><strong>Length:</strong> 7.0 km</span>
+                        <span><strong>Elevation:</strong> 101 m</span>
+                    </div>
+                    <p><strong>Difficulty:</strong> <span class="difficulty-indicator" style="background-color: rgb(0, 128, 0);">2</span> Easy</p>
+                    <a href="/trail_path/Pre's%20Trail" class="cta-button">View Trail</a>
+                </div>
+            </div>
+            
+            <div class="trail-card trail-card-3">
+                <div class="trail-img"></div>
+                <div class="trail-details">
+                    <h3>Mount Pisgah Trail</h3>
+                    <div class="trail-metrics">
+                        <span><strong>Length:</strong> 5.6 km</span>
+                        <span><strong>Elevation:</strong> 322 m</span>
+                    </div>
+                    <p><strong>Difficulty:</strong> <span class="difficulty-indicator" style="background-color: rgb(255, 190, 0);">4</span> Moderate</p>
+                    <a href="/trail_path/Mount%20Pisgah%20Trail" class="cta-button">View Trail</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <h3>Choose Your Starting Point</h3>
+                <p>Select a trailhead or location to discover nearby hiking options.</p>
+            </div>
+            <div class="step">
+                <h3>Filter By Your Needs</h3>
+                <p>Set preferences for difficulty, length, or elevation to find your perfect trail.</p>
+            </div>
+            <div class="step">
+                <h3>Explore Detailed Analysis</h3>
+                <p>Get comprehensive insights about terrain, difficulty, and elevation changes.</p>
+            </div>
+            <div class="step">
+                <h3>Upload Your Own Trails</h3>
+                <p>Create a trail using our trail creator, or upload an existing file.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2025 TrailGrade - Helping hikers make informed decisions</p>
+        <p><a href="/trails">All Trails</a></p>
+    </footer>
+</body>
+</html>

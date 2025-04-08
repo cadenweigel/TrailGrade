@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Trails</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/approve_trails.css') }}">
+    <script>
+        async function approveTrail(filename) {
+            const response = await fetch("/api/approve_trail", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ filename })
+            });
+            const result = await response.json();
+            alert(result.message);
+            if (response.ok) {
+                document.getElementById(filename).remove();
+            }
+        }
+
+        async function denyTrail(filename) {
+            const response = await fetch("/api/deny_trail", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ filename })
+            });
+            const result = await response.json();
+            alert(result.message);
+            if (response.ok) {
+                document.getElementById(filename).remove();
+            }
+        }
+
+        function viewTrail(filename) {
+            window.open(`/view_trail/${filename}`, "_blank");
+        }
+    </script>
+</head>
+<body>
+    <h1>Approve Trails</h1>
+    <ul>
+        {% for trail in trails %}
+            <li id="{{ trail }}">
+                {{ trail }}
+                <button onclick="viewTrail('{{ trail }}')">View</button>
+                <button onclick="approveTrail('{{ trail }}')">Approve</button>
+                <button onclick="denyTrail('{{ trail }}')">Deny</button>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

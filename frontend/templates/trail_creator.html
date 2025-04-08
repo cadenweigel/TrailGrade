@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trail Creator</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/trail_creator.css') }}">
+
+    <style>
+        #map { height: 500px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='/'">Go to Home</button>
+    <h2>Create Your Trail</h2>
+
+    <label for="mapName">Trail Name:</label>
+    <input type="text" id="mapName" placeholder="Enter trail name" required>
+    <button onclick="exportGeoJSON()">Export Trail</button>
+    <button onclick="undoLastPoint()">Undo</button>
+    <button id="editModeButton" onclick="toggleEditMode()">Edit Mode: OFF</button>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='js/trail_creator.js') }}"></script>
+
+    <div id="tutorial">
+        <h3>How to Create Your Trail</h3>
+        <p>Click on the map to add points to your trail. For best results, place points very close together to ensure a smooth path.</p>
+        <p>You can drag points to adjust your route. Click "Undo" to remove the last placed point.</p>
+        <p>Click "Edit Mode" to enable or disable moving points. When ON, you can drag points to fine-tune your trail.</p>
+        <p>When your trail is done, enter a trail name and click "Export GeoJSON" to save your trail.</p>
+        <p><strong>Note:</strong> Your trail will be uploaded for review. If approved, it will be added to the TrailGrade database!</p>
+        <p> You can also upload an existing .geojson file below! Make sure that the file name is the name of the trail.</p>
+    </div>
+
+    <div id="upload-section">
+        <h3>Upload GeoJSON</h3>
+        <label for="geojsonFile">Select a GeoJSON file:</label>
+        <input type="file" id="geojsonFile" accept=".geojson" title="Upload a GeoJSON file to import" >
+        <button onclick="uploadGeoJSON()">Upload File</button>
+    </div>
+
+</body>
+</html>

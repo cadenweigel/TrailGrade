@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trail Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/trails.css') }}">
+
+    <!-- Leaflet for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- Chart.js for Elevation Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar for Trail List & Search -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="title-container">
+                    <button id="menu-button" class="hamburger-menu">☰</button>
+                    <h2>TrailGrade</h2>
+                </div>
+                <div class="search-container">
+                    <input type="text" id="search-trails" class="search-bar" placeholder="Search by name...">
+                    <button id="filter-button" class="filter-button" title="Filter by difficulty">
+                        <span class="funnel-icon"></span>
+                    </button>
+                </div>
+                <div id="filter-popup" class="filter-popup hidden">
+                    <h3>Difficulty: <span id="difficulty-value">1-10</span></h3>
+                    <div class="range-container">
+                        <input type="range" min="1" max="10" value="1" class="range-slider" id="min-difficulty">
+                        <input type="range" min="1" max="10" value="10" class="range-slider" id="max-difficulty">
+                    </div>
+                    <div class="range-labels">
+                        <span>Easy</span>
+                        <span>Hard</span>
+                    </div>
+                    <button id="apply-filter" class="apply-filter">Apply Filter</button>
+                    <button id="reset-filter" class="reset-filter">Reset</button>
+                </div>
+            </div>
+            <div id="trail-list"></div>
+        </div>
+
+        <!-- Map Container -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

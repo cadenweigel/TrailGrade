@@ -1,0 +1,96 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    types: [synchronize, opened, reopened, ready_for_review]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Allows pushing changes to the repository
+permissions:
+  contents: write
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build-and-run"
+  build-and-run:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script, use Python
+        run: |
+          echo "This is a multi-line script"
+          python3 -c "print('Hello from python!')"
+
+  # Second job checks and changes code formatting
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: write  # Ensures the job can push changes
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Ensures full history is fetched
+          token: ${{ secrets.GITHUB_TOKEN }}  # Grants permission to push
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.8"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip 
+          pip install black flake8
+
+      # Changes Format
+      - name: Run Black (Auto-fix formatting)
+        run: black .
+
+      - name: Run Flake8 (Linting Check)
+        run: flake8 . || true
+
+      - name: Get current branch
+        run: echo "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
+
+      # Automatically fixes, commits, and pushes changes
+      - name: Commit and push changes (if any)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          branch_name=${{ env.BRANCH_NAME }}
+          if [[ "$branch_name" == "HEAD" ]]; then
+            branch_name=$GITHUB_HEAD_REF
+            git checkout $branch_name
+          fi
+
+          git add .
+          if ! git diff --quiet --staged; then
+            git commit -m "Auto-format: Black fixes"
+            git push origin $branch_name
+          fi
